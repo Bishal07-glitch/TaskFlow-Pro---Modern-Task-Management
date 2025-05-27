@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow Pro - Modern Task Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>TaskFlow</h2>
+                        <span>Pro</span>
+                    </div>
+                </div>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="nav-section-title">Main</span>
+                    <ul>
+                        <li class="nav-item active">
+                            <a href="#" data-section="dashboard">
+                                <div class="nav-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <span>Dashboard</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" data-section="tasks">
+                                <div class="nav-icon">
+                                    <i class="fas fa-tasks"></i>
+                                </div>
+                                <span>Tasks</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" data-section="calendar">
+                                <div class="nav-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <span>Calendar</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" data-section="analytics">
+                                <div class="nav-icon">
+                                    <i class="fas fa-chart-pie"></i>
+                                </div>
+                                <span>Analytics</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <span class="nav-section-title">Workspace</span>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="#" data-section="projects">
+                                <div class="nav-icon">
+                                    <i class="fas fa-folder"></i>
+                                </div>
+                                <span>Projects</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" data-section="team">
+                                <div class="nav-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <span>Team</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-card">
+                    <div class="user-avatar">
+                        <img src="11." alt="User">
+                        <div class="status-indicator"></div>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">Bishal kunwar</span>
+                        <span class="user-role">Product Manager</span>
+                    </div>
+                    <div class="user-menu">
+                        <button class="user-menu-btn" id="userMenuBtn">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                        <div class="user-menu-dropdown" id="userMenuDropdown">
+                            <button class="menu-item">
+                                <i class="fas fa-user"></i>
+                                Profile
+                            </button>
+                            <button class="menu-item">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </button>
+                            <button class="menu-item">
+                                <i class="fas fa-bell"></i>
+                                Notifications
+                            </button>
+                            <div class="menu-divider"></div>
+                            <button class="menu-item" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="breadcrumb">
+                        <span class="breadcrumb-item">Workspace</span>
+                        <i class="fas fa-chevron-right"></i>
+                        <span class="breadcrumb-item current" id="currentPage">Dashboard</span>
+                    </div>
+                </div>
+                <div class="header-center">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search tasks, projects, or team members..." id="searchInput">
+                            <kbd class="search-shortcut">⌘K</kbd>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="action-btn" title="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">3</span>
+                        </button>
+                        <button class="action-btn" title="Quick Add">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button class="action-btn" title="Settings">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section class="content-section active" id="dashboard">
+                <div class="page-header">
+                    <div class="page-title-section">
+                        <h1 class="page-title">Good morning, Bishal kunwar! 👋</h1>
+                        <p class="page-subtitle">Here's what's happening with your projects today.</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-download"></i>
+                            Export
+                        </button>
+                        <button class="btn btn-primary" id="addTaskBtn">
+                            <i class="fas fa-plus"></i>
+                            New Task
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card primary">
+                        <div class="stat-header">
+                            <div class="stat-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="stat-menu">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </div>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalTasks">0</h3>
+                            <p>Total Tasks</p>
+                            <div class="stat-trend">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+12% from last week</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card success">
+                        <div class="stat-header">
+                            <div class="stat-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-menu">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </div>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="completedTasks">0</h3>
+                            <p>Completed</p>
+                            <div class="stat-trend">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+8% from last week</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card warning">
+                        <div class="stat-header">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-menu">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </div>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="pendingTasks">0</h3>
+                            <p>In Progress</p>
+                            <div class="stat-trend">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>-3% from last week</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card danger">
+                        <div class="stat-header">
+                            <div class="stat-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="stat-menu">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </div>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="overdueTasks">0</h3>
+                            <p>Overdue</p>
+                            <div class="stat-trend">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+2 from yesterday</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Grid -->
+                <div class="dashboard-grid">
+                    <div class="dashboard-card chart-card">
+                        <div class="card-header">
+                            <h3>Task Progress Overview</h3>
+                            <div class="card-actions">
+                                <button class="card-action">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                                <button class="card-action">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <canvas id="progressChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Recent Activity</h3>
+                            <button class="btn btn-text">View All</button>
+                        </div>
+                        <div class="card-content">
+                            <div class="activity-list" id="recentTasksList">
+                                <!-- Recent tasks will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Team Performance</h3>
+                            <div class="card-actions">
+                                <button class="card-action">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="team-stats">
+                                <div class="team-member">
+                                    <div class="member-avatar">
+                                        <img src="nis.jpg" alt="Sarah">
+                                    </div>
+                                    <div class="member-info">
+                                        <span class="member-name">nishan kharel</span>
+                                        <span class="member-tasks">12 tasks completed</span>
+                                    </div>
+                                    <div class="member-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="team-member">
+                                    <div class="member-avatar">
+                                        <img src="pema.jpg" alt="Mike">
+                                    </div>
+                                    <div class="member-info">
+                                        <span class="member-name">pema tamang</span>
+                                        <span class="member-tasks">8 tasks completed</span>
+                                    </div>
+                                    <div class="member-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 65%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="team-member">
+                                    <div class="member-avatar">
+                                        <img src="rup.jpg" alt="Emma">
+                                    </div>
+                                    <div class="member-info">
+                                        <span class="member-name">Rup jung malla</span>
+                                        <span class="member-tasks">15 tasks completed</span>
+                                    </div>
+                                    <div class="member-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 92%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tasks Section -->
+            <section class="content-section" id="tasks">
+                <div class="page-header">
+                    <div class="page-title-section">
+                        <h1 class="page-title">Task Management</h1>
+                        <p class="page-subtitle">Organize and track your team's work efficiently.</p>
+                    </div>
+                    <div class="page-actions">
+                        <div class="view-toggle">
+                            <button class="view-btn active" data-view="kanban">
+                                <i class="fas fa-columns"></i>
+                                Kanban
+                            </button>
+                            <button class="view-btn" data-view="list">
+                                <i class="fas fa-list"></i>
+                                List
+                            </button>
+                        </div>
+                        <button class="btn btn-primary" id="addTaskBtn2">
+                            <i class="fas fa-plus"></i>
+                            New Task
+                        </button>
+                    </div>
+                </div>
+
+                <div class="kanban-container">
+                    <div class="kanban-board">
+                        <div class="kanban-column" data-status="todo">
+                            <div class="column-header">
+                                <div class="column-title">
+                                    <div class="column-icon todo">
+                                        <i class="fas fa-circle"></i>
+                                    </div>
+                                    <h3>To Do</h3>
+                                    <span class="task-count" id="todoCount">0</span>
+                                </div>
+                                <button class="column-menu">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="task-list" id="todoList" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                <!-- Tasks will be populated here -->
+                            </div>
+                            <button class="add-task-btn">
+                                <i class="fas fa-plus"></i>
+                                Add a task
+                            </button>
+                        </div>
+                        
+                        <div class="kanban-column" data-status="inprogress">
+                            <div class="column-header">
+                                <div class="column-title">
+                                    <div class="column-icon inprogress">
+                                        <i class="fas fa-circle-half-stroke"></i>
+                                    </div>
+                                    <h3>In Progress</h3>
+                                    <span class="task-count" id="inprogressCount">0</span>
+                                </div>
+                                <button class="column-menu">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="task-list" id="inprogressList" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                <!-- Tasks will be populated here -->
+                            </div>
+                            <button class="add-task-btn">
+                                <i class="fas fa-plus"></i>
+                                Add a task
+                            </button>
+                        </div>
+                        
+                        <div class="kanban-column" data-status="completed">
+                            <div class="column-header">
+                                <div class="column-title">
+                                    <div class="column-icon completed">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <h3>Completed</h3>
+                                    <span class="task-count" id="completedCount">0</span>
+                                </div>
+                                <button class="column-menu">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="task-list" id="completedList" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                <!-- Tasks will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Calendar Section -->
+            <section class="content-section" id="calendar">
+                <div class="page-header">
+                    <div class="page-title-section">
+                        <h1 class="page-title">Calendar</h1>
+                        <p class="page-subtitle">View and manage your tasks by date.</p>
+                    </div>
+                    <div class="page-actions">
+                        <div class="calendar-nav">
+                            <button class="nav-btn" id="prevMonth">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span class="current-month" id="currentMonth"></span>
+                            <button class="nav-btn" id="nextMonth">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Add Event
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="calendar-container">
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Calendar will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section class="content-section" id="analytics">
+                <div class="page-header">
+                    <div class="page-title-section">
+                        <h1 class="page-title">Analytics</h1>
+                        <p class="page-subtitle">Insights and performance metrics for your team.</p>
+                    </div>
+                    <div class="page-actions">
+                        <select class="select-input">
+                            <option>Last 7 days</option>
+                            <option>Last 30 days</option>
+                            <option>Last 3 months</option>
+                        </select>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-download"></i>
+                            Export Report
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="analytics-grid">
+                    <div class="dashboard-card chart-card">
+                        <div class="card-header">
+                            <h3>Task Completion Rate</h3>
+                            <div class="card-actions">
+                                <button class="card-action">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <canvas id="completionChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card chart-card">
+                        <div class="card-header">
+                            <h3>Priority Distribution</h3>
+                            <div class="card-actions">
+                                <button class="card-action">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <canvas id="priorityChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Task Modal -->
+    <div class="modal-overlay" id="taskModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Create New Task</h3>
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="taskForm" class="modal-content">
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="taskTitle">Task Title</label>
+                        <input type="text" id="taskTitle" class="form-input" placeholder="Enter task title..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="taskDescription">Description</label>
+                        <textarea id="taskDescription" class="form-input" rows="3" placeholder="Add a description..."></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="taskPriority">Priority</label>
+                            <select id="taskPriority" class="form-input">
+                                <option value="easy">🟢 easy</option>
+                                <option value="medium">🟡 Medium</option>
+                                <option value="hard">🔴 Hard</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskDueDate">Due Date</label>
+                            <input type="date" id="taskDueDate" class="form-input">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Assignee</label>
+                        <div class="assignee-selector">
+                            <div class="assignee-option selected">
+                                <img src="11.png" alt="John">
+                                <span>Bishal kunwar</span>
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Save Task
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+// Check authentication on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const user = localStorage.getItem('user')
+    if (!user) {
+        window.location.href = 'auth.html'
+        return
+    }
+    
+    // Update user info in sidebar
+    const userData = JSON.parse(user)
+    document.querySelector('.user-name').textContent = userData.name || 'User'
+    document.querySelector('.user-role').textContent = userData.email || 'user@example.com'
+    if (userData.avatar) {
+        document.querySelector('.user-avatar img').src = userData.avatar
+    }
+})
+
+// Logout functionality
+document.getElementById('logoutBtn').addEventListener('click', (e) => {
+    e.preventDefault()
+    if (confirm('Are you sure you want to logout?')) {
+        localStorage.removeItem('user')
+        localStorage.removeItem('authToken')
+        sessionStorage.clear()
+        window.location.href = 'auth.html'
+    }
+})
+</script>
+</body>
+</html>
