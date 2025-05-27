@@ -41,7 +41,7 @@ TaskFlow Pro is a sleek and intuitive task management dashboard designed to stre
 └── 11.png
 
 view site :
-https://bishal07-glitch.github.io/TaskFlow-Pro---Modern-Task-Management/
+https://bishal07-glitch.github.io/TaskFlow-Pro---Modern-Task-Management/auth.html
 
 ⚙️ Setup & Run
 Clone the repository:
